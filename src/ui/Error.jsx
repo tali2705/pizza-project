@@ -1,31 +1,17 @@
-import {
-  isRouteErrorResponse,
-  useNavigate,
-  useRouteError,
-} from "react-router-dom";
+import { useRouteError } from 'react-router-dom';
+import LinkButton from './LinkButton';
 
-function NotFound() {
-  const navigate = useNavigate();
+function Error() {
   const error = useRouteError();
-
-  const status = isRouteErrorResponse(error) ? error.status : 500;
-  const statusText = isRouteErrorResponse(error)
-    ? error.statusText || "Something went wrong :("
-    : "Internal server error";
-  const message =
-    isRouteErrorResponse(error) && error.data?.message
-      ? error.data.message
-      : error.message || error.error.message;
+  console.log(error);
 
   return (
     <div>
-      <h1>
-        {status} - {statusText}
-      </h1>
-      <h3>{message}</h3>
-      <button onClick={() => navigate(-1)}>&larr; Go back</button>
+      <h1>{!error && `Something went wrong :(`}</h1>
+      <h3>{error?.data || error?.message || `Path doesn't exist`}</h3>
+      <LinkButton to="-1">Go back</LinkButton>
     </div>
   );
 }
 
-export default NotFound;
+export default Error;

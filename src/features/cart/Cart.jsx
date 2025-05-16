@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Button from '../../ui/Button';
+import LinkButton from '../../ui/LinkButton';
+import CartItem from './CartItem';
 
 const fakeCart = [
   {
@@ -25,17 +28,26 @@ const fakeCart = [
 ];
 
 function Cart() {
-  const cart = fakeCart;
-
+  const cart = useSelector((state) => state.cart.cart);
+  const username = useSelector((state) => state.user.username);
   return (
-    <div>
-      <Link to="/menu">&larr; Back to menu</Link>
+    <div className="px-4 py-3">
+      <LinkButton to="/menu">&larr; Back to menu</LinkButton>
 
-      <h2>Your cart, %NAME%</h2>
+      <h2 className="mt-7 text-xl font-semibold">Your cart, {username}</h2>
 
-      <div>
-        <Link to="/order/new">Order pizzas</Link>
-        <button>Clear cart</button>
+      <ul className="mt-3 divide-y divide-stone-200 border-b">
+        {cart.map((item) => (
+          <CartItem key={item.pizzaId} item={item} />
+        ))}
+      </ul>
+
+      <div className="mt-6 space-x-2">
+        <Button type="primary" to="/order/new">
+          Order pizzas
+        </Button>
+
+        <Button type="secondary">Clear cart</Button>
       </div>
     </div>
   );
