@@ -4,9 +4,12 @@ import Username from '../features/user/Username';
 
 function Header() {
   return (
-    <header className="flex items-center justify-between border-b border-stone-200 bg-yellow-500 px-4 py-3 uppercase sm:px-6">
+    <header className="flex items-center justify-between border-b border-stone-200 bg-teal-600 px-4 py-3 uppercase sm:px-6">
       <div>
-        <Link className="text-xl font-bold tracking-widest" to="/">
+        <Link
+          className="text-xl font-bold tracking-widest text-stone-100"
+          to="/"
+        >
           TaliZZa Pizza Co.
         </Link>
       </div>
